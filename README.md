@@ -17,11 +17,21 @@ composer require wyrihaximus/react-cache-json
 
 # Usage
 
+Wrap any class implementing `React\Cache\CacheInterface` and it will encode any value you give it to JSON when saving, and decode it back to an array or scalar when fetching:
+
 ```php
 <?php
 
-$cache = new Cache();
+$cache = new ArrayCache();
 $jsonCache = new Json($cache);
+
+$jsonCache->set('key', ['value']); // Store
+$jsonCache->get('key')->then(function ($value) {
+    var_export($value);
+    /**
+     * ['value']
+     */
+});
 
 ```
 
