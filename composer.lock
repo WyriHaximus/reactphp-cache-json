@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "caee975ff644b548a55cd252e0e1bc95",
+    "content-hash": "222d50e3ab88e332c5a4a07794a0a06f",
     "packages": [
         {
             "name": "daverandom/exceptional-json",
@@ -43,16 +43,16 @@
         },
         {
             "name": "react/cache",
-            "version": "v0.4.2",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/cache.git",
-                "reference": "75494f26b4ef089db9bf8c90b63c296246e099e8"
+                "reference": "7d7da7fb7574d471904ba357b39bbf110ccdbf66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/cache/zipball/75494f26b4ef089db9bf8c90b63c296246e099e8",
-                "reference": "75494f26b4ef089db9bf8c90b63c296246e099e8",
+                "url": "https://api.github.com/repos/reactphp/cache/zipball/7d7da7fb7574d471904ba357b39bbf110ccdbf66",
+                "reference": "7d7da7fb7574d471904ba357b39bbf110ccdbf66",
                 "shasum": ""
             },
             "require": {
@@ -79,7 +79,7 @@
                 "promise",
                 "reactphp"
             ],
-            "time": "2017-12-20T16:47:13+00:00"
+            "time": "2018-06-25T12:52:40+00:00"
         },
         {
             "name": "react/promise",
