@@ -18,7 +18,7 @@ final class JsonTest extends TestCase
         ];
 
         $cache = $this->prophesize(CacheInterface::class);
-        $cache->get($key)->shouldBeCalled()->willReturn(resolve($string));
+        $cache->get($key, null)->shouldBeCalled()->willReturn(resolve($string));
 
         $jsonCache = new Json($cache->reveal());
         self::assertSame($json, $this->await($jsonCache->get($key)));
@@ -33,20 +33,20 @@ final class JsonTest extends TestCase
         ];
 
         $cache = $this->prophesize(CacheInterface::class);
-        $cache->set($key, $string)->shouldBeCalled();
+        $cache->set($key, $string, null)->shouldBeCalled();
 
         $jsonCache = new Json($cache->reveal());
         $jsonCache->set($key, $json);
     }
 
-    public function testRemove()
+    public function testDelete()
     {
         $key = 'sleutel';
 
         $cache = $this->prophesize(CacheInterface::class);
-        $cache->remove($key)->shouldBeCalled();
+        $cache->delete($key)->shouldBeCalled();
 
         $jsonCache = new Json($cache->reveal());
-        $jsonCache->remove($key);
+        $jsonCache->delete($key);
     }
 }

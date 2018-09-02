@@ -9,10 +9,8 @@ use function ExceptionalJSON\encode;
 
 final class Json implements CacheInterface
 {
-    /**
-     * @var CacheInterface
-     */
-    protected $cache;
+    /** @var CacheInterface */
+    private $cache;
 
     /**
      * @param CacheInterface $cache
@@ -24,11 +22,12 @@ final class Json implements CacheInterface
 
     /**
      * @param  string           $key
+     * @param  null             $default
      * @return PromiseInterface
      */
-    public function get($key)
+    public function get($key, $default = null)
     {
-        return $this->cache->get($key)->then(function ($result) {
+        return $this->cache->get($key, $default)->then(function ($result) {
             return decode($result, true);
         });
     }
@@ -36,19 +35,20 @@ final class Json implements CacheInterface
     /**
      * @param  string           $key
      * @param  mixed            $value
+     * @param  null             $ttl
      * @return PromiseInterface
      */
-    public function set($key, $value)
+    public function set($key, $value, $ttl = null)
     {
-        return $this->cache->set($key, encode($value));
+        return $this->cache->set($key, encode($value), $ttl);
     }
 
     /**
      * @param  string           $key
      * @return PromiseInterface
      */
-    public function remove($key)
+    public function delete($key)
     {
-        return $this->cache->remove($key);
+        return $this->cache->delete($key);
     }
 }
