@@ -24,6 +24,17 @@ final class JsonTest extends TestCase
         self::assertSame($json, $this->await($jsonCache->get($key)));
     }
 
+    public function testGetNullShouldBeIgnored()
+    {
+        $key = 'sleutel';
+
+        $cache = $this->prophesize(CacheInterface::class);
+        $cache->get($key, null)->shouldBeCalled()->willReturn(resolve(null));
+
+        $jsonCache = new Json($cache->reveal());
+        self::assertNull($this->await($jsonCache->get($key)));
+    }
+
     public function testSet()
     {
         $key = 'sleutel';

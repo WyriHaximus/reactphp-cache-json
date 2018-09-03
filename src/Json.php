@@ -27,7 +27,11 @@ final class Json implements CacheInterface
      */
     public function get($key, $default = null)
     {
-        return $this->cache->get($key, $default)->then(function ($result) {
+        return $this->cache->get($key, $default)->then(function ($result) use ($default) {
+            if ($result === null || $result === $default) {
+                return $result;
+            }
+
             return decode($result, true);
         });
     }
