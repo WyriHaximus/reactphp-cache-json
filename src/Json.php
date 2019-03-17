@@ -2,10 +2,10 @@
 
 namespace WyriHaximus\React\Cache;
 
-use React\Cache\CacheInterface;
-use React\Promise\PromiseInterface;
 use function ExceptionalJSON\decode;
 use function ExceptionalJSON\encode;
+use React\Cache\CacheInterface;
+use React\Promise\PromiseInterface;
 
 final class Json implements CacheInterface
 {

@@ -4,8 +4,8 @@ namespace WyriHaximus\Tests\React\Cache;
 
 use ApiClients\Tools\TestUtilities\TestCase;
 use React\Cache\CacheInterface;
-use WyriHaximus\React\Cache\Json;
 use function React\Promise\resolve;
+use WyriHaximus\React\Cache\Json;
 
 /**
  * @internal
