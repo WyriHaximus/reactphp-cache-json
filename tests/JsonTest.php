@@ -2,15 +2,15 @@
 
 namespace WyriHaximus\Tests\React\Cache;
 
-use ApiClients\Tools\TestUtilities\TestCase;
 use React\Cache\CacheInterface;
 use function React\Promise\resolve;
+use WyriHaximus\AsyncTestUtilities\AsyncTestCase;
 use WyriHaximus\React\Cache\Json;
 
 /**
  * @internal
  */
-final class JsonTest extends TestCase
+final class JsonTest extends AsyncTestCase
 {
     public function testGet(): void
     {
