@@ -11,7 +11,7 @@
     "require": {
         "php": "^7.2",
         "daverandom/exceptional-json": "^1.0",
-        "react/cache": "^0.6.0"
+        "react/cache": "^0.6.0 || ^1.0.0"
     },
     "require-dev": {
         "wyrihaximus/async-test-utilities": "^1.1"
