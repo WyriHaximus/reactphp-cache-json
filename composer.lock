@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8e990ed730c8d90145f329a51fc5c69",
+    "content-hash": "9222c311cd774914c791623aab1cfd4b",
     "packages": [
         {
             "name": "daverandom/exceptional-json",
@@ -8411,7 +8411,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4"
+        "php": "^8 || ^7.4"
     },
     "platform-dev": [],
     "platform-overrides": {
