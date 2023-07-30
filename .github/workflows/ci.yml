@@ -50,7 +50,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Cache composer packages
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: ./vendor/
           key: ${{ matrix.composer }}-${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
@@ -83,7 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Cache composer packages
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: ./vendor/
           key: ${{ matrix.composer }}-${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
@@ -125,7 +125,7 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: xdebug, pcov
       - name: Cache composer packages
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: ./vendor/
           key: ${{ matrix.composer }}-${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
