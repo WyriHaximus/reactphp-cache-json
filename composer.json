@@ -11,7 +11,7 @@
     "require": {
         "php": "^8 || ^7.4",
         "daverandom/exceptional-json": "^1.0.4",
-        "react/cache": "^1.1.1",
+        "react/cache": "^1.2.0",
         "react/promise": "^2.10.0"
     },
     "require-dev": {
