@@ -12,7 +12,7 @@
         "php": "^8 || ^7.4",
         "daverandom/exceptional-json": "^1.0.4",
         "react/cache": "^1.1.1",
-        "react/promise": "^2.8"
+        "react/promise": "^2.10.0"
     },
     "require-dev": {
         "wyrihaximus/async-test-utilities": "^3.4.20 || ^4.0.0"
