@@ -9,19 +9,13 @@
         }
     ],
     "require": {
-        "php": "^8 || ^7.4",
+        "php": "^8.2",
         "daverandom/exceptional-json": "^1.0.4",
         "react/cache": "^1.2.0",
         "react/promise": "^2.10.0"
     },
     "require-dev": {
-        "wyrihaximus/async-test-utilities": "^3.4.20 || ^4.0.0 || ^7.0.0"
-    },
-    "config": {
-        "platform": {
-            "php": "7.4.7"
-        },
-        "sort-packages": true
+        "wyrihaximus/async-test-utilities": "^7.2"
     },
     "autoload": {
         "psr-4": {
@@ -32,6 +26,18 @@
         "psr-4": {
             "WyriHaximus\\Tests\\React\\Cache\\": "tests/"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "infection/extension-installer": true,
+            "ergebnis/composer-normalize": true,
+            "icanhazstring/composer-unused": true
+        },
+        "platform": {
+            "php": "8.2.13"
+        },
+        "sort-packages": true
     },
     "scripts": {
         "post-install-cmd": [

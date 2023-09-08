@@ -9,11 +9,10 @@ use WyriHaximus\AsyncTestUtilities\AsyncTestCase;
 use WyriHaximus\React\Cache\Json;
 
 use function current;
+use function React\Async\await;
 use function React\Promise\resolve;
 
-/**
- * @internal
- */
+/** @internal */
 final class JsonTest extends AsyncTestCase
 {
     public function testGet(): void
@@ -26,7 +25,7 @@ final class JsonTest extends AsyncTestCase
         $cache->get($key, null)->shouldBeCalled()->willReturn(resolve($string));
 
         $jsonCache = new Json($cache->reveal());
-        self::assertSame($json, $this->await($jsonCache->get($key)));
+        self::assertSame($json, await($jsonCache->get($key)));
     }
 
     public function testGetNullShouldBeIgnored(): void
@@ -37,7 +36,7 @@ final class JsonTest extends AsyncTestCase
         $cache->get($key, null)->shouldBeCalled()->willReturn(resolve(null));
 
         $jsonCache = new Json($cache->reveal());
-        self::assertNull($this->await($jsonCache->get($key)));
+        self::assertNull(await($jsonCache->get($key)));
     }
 
     public function testSet(): void
@@ -74,7 +73,7 @@ final class JsonTest extends AsyncTestCase
         $cache->getMultiple([$key], null)->shouldBeCalled()->willReturn(resolve([$key => $string]));
 
         $jsonCache = new Json($cache->reveal());
-        self::assertSame([$key => $json], $this->await($jsonCache->getMultiple([$key])));
+        self::assertSame([$key => $json], await($jsonCache->getMultiple([$key])));
     }
 
     public function testGetMultipleNullShouldBeIgnored(): void
@@ -85,7 +84,8 @@ final class JsonTest extends AsyncTestCase
         $cache->getMultiple([$key], null)->shouldBeCalled()->willReturn(resolve([$key => null]));
 
         $jsonCache = new Json($cache->reveal());
-        self::assertNull(current($this->await($jsonCache->getMultiple([$key]))));
+        /** @phpstan-ignore-next-line */
+        self::assertNull(current(await($jsonCache->getMultiple([$key]))));
     }
 
     public function testSetMultiple(): void

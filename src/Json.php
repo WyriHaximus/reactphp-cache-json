@@ -12,11 +12,8 @@ use function ExceptionalJSON\encode;
 
 final class Json implements CacheInterface
 {
-    private CacheInterface $cache;
-
-    public function __construct(CacheInterface $cache)
+    public function __construct(private CacheInterface $cache)
     {
-        $this->cache = $cache;
     }
 
     /**
@@ -31,7 +28,7 @@ final class Json implements CacheInterface
          * @psalm-suppress TooManyTemplateParams
          * @phpstan-ignore-next-line
          */
-        return $this->cache->get($key, $default)->then(static function (?string $result) use ($default) {
+        return $this->cache->get($key, $default)->then(static function (string|null $result) use ($default) {
             if ($result === null || $result === $default) {
                 return $result;
             }
@@ -46,20 +43,14 @@ final class Json implements CacheInterface
      */
     public function set($key, $value, $ttl = null): PromiseInterface
     {
-        /**
-         * @psalm-suppress TooManyTemplateParams
-         */
+        /** @psalm-suppress TooManyTemplateParams */
         return $this->cache->set($key, encode($value), $ttl);
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function delete($key): PromiseInterface
     {
-        /**
-         * @psalm-suppress TooManyTemplateParams
-         */
+        /** @psalm-suppress TooManyTemplateParams */
         return $this->cache->delete($key);
     }
 
@@ -69,9 +60,7 @@ final class Json implements CacheInterface
      */
     public function getMultiple(array $keys, $default = null)
     {
-        /**
-         * @psalm-suppress TooManyTemplateParams
-         */
+        /** @psalm-suppress TooManyTemplateParams */
         return $this->cache->getMultiple($keys, $default)->then(static function (array $results) use ($default): array {
             foreach ($results as $key => $result) {
                 if ($result === null || $result === $default) {
@@ -95,42 +84,28 @@ final class Json implements CacheInterface
             $values[$key] = encode($value);
         }
 
-        /**
-         * @psalm-suppress TooManyTemplateParams
-         */
+        /** @psalm-suppress TooManyTemplateParams */
         return $this->cache->setMultiple($values, $ttl);
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function deleteMultiple(array $keys)
     {
-        /**
-         * @psalm-suppress TooManyTemplateParams
-         */
+        /** @psalm-suppress TooManyTemplateParams */
         return $this->cache->deleteMultiple($keys);
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function clear()
     {
-        /**
-         * @psalm-suppress TooManyTemplateParams
-         */
+        /** @psalm-suppress TooManyTemplateParams */
         return $this->cache->clear();
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function has($key)
     {
-        /**
-         * @psalm-suppress TooManyTemplateParams
-         */
+        /** @psalm-suppress TooManyTemplateParams */
         return $this->cache->has($key);
     }
 }
