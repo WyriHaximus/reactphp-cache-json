@@ -1,11 +1,10 @@
 # JSON encode/decode decorator for react/cache
 
-[![Build Status](https://travis-ci.org/WyriHaximus/reactphp-cache-json.svg?branch=master)](https://travis-ci.org/WyriHaximus/reactphp-cache-json)
-[![Latest Stable Version](https://poser.pugx.org/WyriHaximus/react-cache-json/v/stable.png)](https://packagist.org/packages/WyriHaximus/react-cache-json)
-[![Total Downloads](https://poser.pugx.org/WyriHaximus/react-cache-json/downloads.png)](https://packagist.org/packages/WyriHaximus/react-cache-json)
-[![Code Coverage](https://scrutinizer-ci.com/g/WyriHaximus/reactphp-cache-json/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/WyriHaximus/reactphp-cache-json/?branch=master)
-[![License](https://poser.pugx.org/WyriHaximus/react-cache-json/license.png)](https://packagist.org/packages/WyriHaximus/react-cache-json)
-[![PHP 7 ready](http://php7ready.timesplinter.ch/WyriHaximus/reactphp-cache-json/badge.svg)](https://travis-ci.org/WyriHaximus/reactphp-cache-json)
+![Continuous Integration](https://github.com/wyrihaximus/reactphp-cache-json/workflows/Continuous%20Integration/badge.svg)
+[![Latest Stable Version](https://poser.pugx.org/wyrihaximus/react-cache-json/v/stable.png)](https://packagist.org/packages/wyrihaximus/react-cache-json)
+[![Total Downloads](https://poser.pugx.org/wyrihaximus/react-cache-json/downloads.png)](https://packagist.org/packages/wyrihaximus/react-cache-json/stats)
+[![Type Coverage](https://shepherd.dev/github/WyriHaximus/reactphp-cache-json/coverage.svg)](https://shepherd.dev/github/WyriHaximus/reactphp-cache-json)
+[![License](https://poser.pugx.org/wyrihaximus/react-cache-json/license.png)](https://packagist.org/packages/wyrihaximus/react-cache-json)
 
 # Installation
 
@@ -39,7 +38,7 @@ $jsonCache->get('key')->then(function ($value) {
 
 The MIT License (MIT)
 
-Copyright (c) 2018 Cees-Jan Kiewiet
+Copyright (c) 2024 Cees-Jan Kiewiet
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
