@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace WyriHaximus\Tests\React\Cache;
 
+use Mockery;
+use PHPUnit\Framework\Attributes\Test;
 use React\Cache\CacheInterface;
 use WyriHaximus\AsyncTestUtilities\AsyncTestCase;
 use WyriHaximus\React\Cache\Json;
@@ -12,121 +14,129 @@ use function current;
 use function React\Async\await;
 use function React\Promise\resolve;
 
-/** @internal */
 final class JsonTest extends AsyncTestCase
 {
-    public function testGet(): void
+    #[Test]
+    public function get(): void
     {
         $key    = 'sleutel';
         $string = '{"foo":"bar"}';
         $json   = ['foo' => 'bar'];
 
-        $cache = $this->prophesize(CacheInterface::class);
-        $cache->get($key, null)->shouldBeCalled()->willReturn(resolve($string));
+        $cache = Mockery::mock(CacheInterface::class);
+        $cache->expects('get')->with($key, null)->atLeast()->once()->andReturn(resolve($string));
 
-        $jsonCache = new Json($cache->reveal());
+        $jsonCache = new Json($cache);
         self::assertSame($json, await($jsonCache->get($key)));
     }
 
-    public function testGetNullShouldBeIgnored(): void
+    #[Test]
+    public function getNullShouldBeIgnored(): void
     {
         $key = 'sleutel';
 
-        $cache = $this->prophesize(CacheInterface::class);
-        $cache->get($key, null)->shouldBeCalled()->willReturn(resolve(null));
+        $cache = Mockery::mock(CacheInterface::class);
+        $cache->expects('get')->with($key, null)->atLeast()->once()->andReturn(resolve(null));
 
-        $jsonCache = new Json($cache->reveal());
+        $jsonCache = new Json($cache);
         self::assertNull(await($jsonCache->get($key)));
     }
 
-    public function testSet(): void
+    #[Test]
+    public function set(): void
     {
         $key    = 'sleutel';
         $string = '{"foo":"bar"}';
         $json   = ['foo' => 'bar'];
 
-        $cache = $this->prophesize(CacheInterface::class);
-        $cache->set($key, $string, null)->shouldBeCalled()->willReturn(resolve(true));
+        $cache = Mockery::mock(CacheInterface::class);
+        $cache->expects('set')->with($key, $string, null)->atLeast()->once()->andReturn(resolve(true));
 
-        $jsonCache = new Json($cache->reveal());
+        $jsonCache = new Json($cache);
         $jsonCache->set($key, $json);
     }
 
-    public function testDelete(): void
+    #[Test]
+    public function delete(): void
     {
         $key = 'sleutel';
 
-        $cache = $this->prophesize(CacheInterface::class);
-        $cache->delete($key)->shouldBeCalled()->willReturn(resolve(true));
+        $cache = Mockery::mock(CacheInterface::class);
+        $cache->expects('delete')->with($key)->atLeast()->once()->andReturn(resolve(true));
 
-        $jsonCache = new Json($cache->reveal());
+        $jsonCache = new Json($cache);
         $jsonCache->delete($key);
     }
 
-    public function testGetMultiple(): void
+    #[Test]
+    public function getMultiple(): void
     {
         $key    = 'sleutel';
         $string = '{"foo":"bar"}';
         $json   = ['foo' => 'bar'];
 
-        $cache = $this->prophesize(CacheInterface::class);
-        $cache->getMultiple([$key], null)->shouldBeCalled()->willReturn(resolve([$key => $string]));
+        $cache = Mockery::mock(CacheInterface::class);
+        $cache->expects('getMultiple')->with([$key], null)->atLeast()->once()->andReturn(resolve([$key => $string]));
 
-        $jsonCache = new Json($cache->reveal());
+        $jsonCache = new Json($cache);
         self::assertSame([$key => $json], await($jsonCache->getMultiple([$key])));
     }
 
-    public function testGetMultipleNullShouldBeIgnored(): void
+    #[Test]
+    public function getMultipleNullShouldBeIgnored(): void
     {
         $key = 'sleutel';
 
-        $cache = $this->prophesize(CacheInterface::class);
-        $cache->getMultiple([$key], null)->shouldBeCalled()->willReturn(resolve([$key => null]));
+        $cache = Mockery::mock(CacheInterface::class);
+        $cache->expects('getMultiple')->with([$key], null)->atLeast()->once()->andReturn(resolve([$key => null]));
 
-        $jsonCache = new Json($cache->reveal());
-        /** @phpstan-ignore-next-line */
+        $jsonCache = new Json($cache);
         self::assertNull(current(await($jsonCache->getMultiple([$key]))));
     }
 
-    public function testSetMultiple(): void
+    #[Test]
+    public function setMultiple(): void
     {
         $key    = 'sleutel';
         $string = '{"foo":"bar"}';
         $json   = ['foo' => 'bar'];
 
-        $cache = $this->prophesize(CacheInterface::class);
-        $cache->setMultiple([$key => $string], null)->shouldBeCalled();
+        $cache = Mockery::mock(CacheInterface::class);
+        $cache->expects('setMultiple')->with([$key => $string], null)->atLeast()->once();
 
-        $jsonCache = new Json($cache->reveal());
+        $jsonCache = new Json($cache);
         $jsonCache->setMultiple([$key => $json]);
     }
 
-    public function testDeleteMultiple(): void
+    #[Test]
+    public function deleteMultiple(): void
     {
         $key   = 'sleutel';
-        $cache = $this->prophesize(CacheInterface::class);
-        $cache->deleteMultiple([$key], null)->shouldBeCalled();
+        $cache = Mockery::mock(CacheInterface::class);
+        $cache->expects('deleteMultiple')->with([$key])->atLeast()->once();
 
-        $jsonCache = new Json($cache->reveal());
+        $jsonCache = new Json($cache);
         $jsonCache->deleteMultiple([$key]);
     }
 
-    public function testClear(): void
+    #[Test]
+    public function clear(): void
     {
-        $cache = $this->prophesize(CacheInterface::class);
-        $cache->clear()->shouldBeCalled();
+        $cache = Mockery::mock(CacheInterface::class);
+        $cache->expects('clear')->atLeast()->once();
 
-        $jsonCache = new Json($cache->reveal());
+        $jsonCache = new Json($cache);
         $jsonCache->clear();
     }
 
-    public function testHas(): void
+    #[Test]
+    public function has(): void
     {
         $key   = 'sleutel';
-        $cache = $this->prophesize(CacheInterface::class);
-        $cache->has($key, null)->shouldBeCalled();
+        $cache = Mockery::mock(CacheInterface::class);
+        $cache->expects('has')->with($key)->atLeast()->once();
 
-        $jsonCache = new Json($cache->reveal());
+        $jsonCache = new Json($cache);
         $jsonCache->has($key);
     }
 }
