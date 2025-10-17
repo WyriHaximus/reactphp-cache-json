@@ -18,43 +18,44 @@ final readonly class Json implements CacheInterface
 
     /**
      * @inheritDoc
-     * @phpstan-ignore-next-line
+     * @phpstan-ignore typeCoverage.paramTypeCoverage,typeCoverage.paramTypeCoverage,ergebnis.noParameterWithNullDefaultValue
      */
     public function get($key, $default = null): PromiseInterface
     {
-        /**
-         * @return ?mixed
-         *
-         * @phpstan-ignore-next-line
-         */
-        return $this->cache->get($key, $default)->then(static function (string|null $result) use ($default) {
+        /** @return ?mixed */
+        return $this->cache->get($key, $default)->then(static function (mixed $result) use ($default) {
             if ($result === null || $result === $default) {
                 return $result;
             }
 
-            /** @phpstan-ignore shipmonk.checkedExceptionInCallable */
+            /** @phpstan-ignore shipmonk.checkedExceptionInCallable,argument.type */
             return decode($result, true);
         });
     }
 
     /**
      * @inheritDoc
-     * @phpstan-ignore-next-line
+     * @phpstan-ignore typeCoverage.paramTypeCoverage,ergebnis.noParameterWithNullDefaultValue,typeCoverage.paramTypeCoverage,typeCoverage.paramTypeCoverage
      */
     public function set($key, $value, $ttl = null): PromiseInterface
     {
         return $this->cache->set($key, encode($value), $ttl);
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @phpstan-ignore typeCoverage.paramTypeCoverage
+     */
     public function delete($key): PromiseInterface
     {
         return $this->cache->delete($key);
     }
 
     /**
+     * @param array<string> $keys
+     *
      * @inheritDoc
-     * @phpstan-ignore-next-line
+     * @phpstan-ignore typeCoverage.paramTypeCoverage,typeCoverage.returnTypeCoverage,ergebnis.noParameterWithNullDefaultValue,missingType.iterableValue
      */
     public function getMultiple(array $keys, $default = null)
     {
@@ -72,8 +73,10 @@ final readonly class Json implements CacheInterface
     }
 
     /**
+     * @param array<mixed, mixed> $values
+     *
      * @inheritDoc
-     * @phpstan-ignore-next-line
+     * @phpstan-ignore typeCoverage.paramTypeCoverage,typeCoverage.returnTypeCoverage,ergebnis.noParameterWithNullDefaultValue
      */
     public function setMultiple(array $values, $ttl = null)
     {
@@ -84,19 +87,28 @@ final readonly class Json implements CacheInterface
         return $this->cache->setMultiple($values, $ttl);
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @phpstan-ignore typeCoverage.returnTypeCoverage,shipmonk.missingNativeReturnTypehint
+     */
     public function deleteMultiple(array $keys)
     {
         return $this->cache->deleteMultiple($keys);
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @phpstan-ignore typeCoverage.returnTypeCoverage,shipmonk.missingNativeReturnTypehint
+     */
     public function clear()
     {
         return $this->cache->clear();
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @phpstan-ignore typeCoverage.paramTypeCoverage,typeCoverage.returnTypeCoverage,shipmonk.missingNativeReturnTypehint
+     */
     public function has($key)
     {
         return $this->cache->has($key);
