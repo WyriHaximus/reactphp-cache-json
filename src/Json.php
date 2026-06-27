@@ -10,6 +10,7 @@ use React\Promise\PromiseInterface;
 use function ExceptionalJSON\decode;
 use function ExceptionalJSON\encode;
 
+/** @api */
 final readonly class Json implements CacheInterface
 {
     public function __construct(private CacheInterface $cache)
@@ -18,34 +19,31 @@ final readonly class Json implements CacheInterface
 
     /**
      * @inheritDoc
-     * @phpstan-ignore typeCoverage.paramTypeCoverage,typeCoverage.paramTypeCoverage,ergebnis.noParameterWithNullDefaultValue
+     * @phpstan-ignore ergebnis.noParameterWithNullDefaultValue
      */
     public function get($key, $default = null): PromiseInterface
     {
         /** @return ?mixed */
-        return $this->cache->get($key, $default)->then(static function (mixed $result) use ($default) {
+        return $this->cache->get($key, $default)->then(static function (mixed $result) use ($default): mixed {
             if ($result === null || $result === $default) {
                 return $result;
             }
 
-            /** @phpstan-ignore shipmonk.checkedExceptionInCallable,argument.type */
+            /** @phpstan-ignore argument.type */
             return decode($result, true);
         });
     }
 
     /**
      * @inheritDoc
-     * @phpstan-ignore typeCoverage.paramTypeCoverage,ergebnis.noParameterWithNullDefaultValue,typeCoverage.paramTypeCoverage,typeCoverage.paramTypeCoverage
+     * @phpstan-ignore ergebnis.noParameterWithNullDefaultValue
      */
     public function set($key, $value, $ttl = null): PromiseInterface
     {
         return $this->cache->set($key, encode($value), $ttl);
     }
 
-    /**
-     * @inheritDoc
-     * @phpstan-ignore typeCoverage.paramTypeCoverage
-     */
+    /** @inheritDoc */
     public function delete($key): PromiseInterface
     {
         return $this->cache->delete($key);
@@ -55,7 +53,7 @@ final readonly class Json implements CacheInterface
      * @param array<string> $keys
      *
      * @inheritDoc
-     * @phpstan-ignore typeCoverage.paramTypeCoverage,typeCoverage.returnTypeCoverage,ergebnis.noParameterWithNullDefaultValue,missingType.iterableValue
+     * @phpstan-ignore typeCoverage.returnTypeCoverage,ergebnis.noParameterWithNullDefaultValue,missingType.iterableValue,shipmonk.missingNativeReturnTypehint
      */
     public function getMultiple(array $keys, $default = null)
     {
@@ -76,7 +74,7 @@ final readonly class Json implements CacheInterface
      * @param array<mixed, mixed> $values
      *
      * @inheritDoc
-     * @phpstan-ignore typeCoverage.paramTypeCoverage,typeCoverage.returnTypeCoverage,ergebnis.noParameterWithNullDefaultValue
+     * @phpstan-ignore typeCoverage.returnTypeCoverage,ergebnis.noParameterWithNullDefaultValue,shipmonk.missingNativeReturnTypehint
      */
     public function setMultiple(array $values, $ttl = null)
     {
@@ -107,7 +105,7 @@ final readonly class Json implements CacheInterface
 
     /**
      * @inheritDoc
-     * @phpstan-ignore typeCoverage.paramTypeCoverage,typeCoverage.returnTypeCoverage,shipmonk.missingNativeReturnTypehint
+     * @phpstan-ignore typeCoverage.returnTypeCoverage,shipmonk.missingNativeReturnTypehint
      */
     public function has($key)
     {

@@ -4,12 +4,3 @@ parameters:
 		- ../../src
 		- ../../tests
 	level: max
-	ignoreErrors:
-		-
-			identifier: shipmonk.missingNativeReturnTypehint
-			path: ../../src/Json.php
-			count: 3
-		-
-			identifier: shipmonk.checkedExceptionInCallable
-			path: ../../src/Json.php
-			count: 1
